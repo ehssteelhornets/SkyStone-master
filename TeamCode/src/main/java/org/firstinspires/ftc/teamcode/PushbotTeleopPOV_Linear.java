@@ -39,12 +39,15 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp(name="Pushbot: Teleop POV", group="Pushbot")
 public class PushbotTeleopPOV_Linear extends LinearOpMode {
     // Declare OpMode members.
+    int bob = 0;
     private ElapsedTime runtime = new ElapsedTime();
     static double right;
     static double left;
     static double right2;
     static double left2;
+    static double foundHook = 1;
     Pushbot_2019 robot = new Pushbot_2019();
+
     @Override
     public void runOpMode() {
         // Save reference to Hardware map
@@ -55,8 +58,11 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
         waitForStart();
         runtime.reset();
         // run until the end of the match (driver presses STOP)
+        int mode = 1;
+        telemetry.addData("opModeIsActive", opModeIsActive());
+        telemetry.update();
         while (opModeIsActive()) {
-            int mode = 1;
+            telemetry.update();
             if (gamepad1.right_stick_button && mode == 1) {
                 mode++;
                 sleep(100);
@@ -66,7 +72,7 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
             }
             //Tank Drive
             if (mode == 2) {
-                telemetry.addData("Driving", "false");
+                //telemetry.addData("Driving", "false");
                 telemetry.update();
                 right = gamepad1.right_stick_y;
                 left = gamepad1.left_stick_y;
@@ -79,7 +85,7 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
                 drive(precisionMode, reverseMode);
             } else if (mode == 1) {
                 //Mech Drive
-                telemetry.addData("Driving", "true");
+                //telemetry.addData("Driving", "true");
                 telemetry.update();
                 double r = Math.hypot(-gamepad1.left_stick_x, -gamepad1.left_stick_y);
                 double robotAngle = Math.atan2(-gamepad1.left_stick_y, -gamepad1.left_stick_x) - Math.PI / 4;
@@ -93,19 +99,63 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
                 robot.leftDrive2.setPower(v3);
                 robot.rightDrive2.setPower(v4);
             }
+
+            //puts claw in right location
+            robot.tuckAwayClaw.setPosition(0.0);
+
+            //foundation hook toggle
+            if (gamepad1.a && foundHook != 0) {
+                foundHook--;
+                sleep(300);
+            } else if (gamepad1.a) {
+                foundHook++;
+                sleep(300);
+            }
+
+            if (foundHook != 0) {
+                robot.foundHook1.setPosition(0.0);
+                robot.foundHook2.setPosition(1.0);
+            }
+            if (foundHook == 0) {
+                robot.foundHook1.setPosition(1.0);
+                robot.foundHook2.setPosition(0.0);
+            }
+
+
             //Controls linear actuator
             // Show the elapsed game time and wheel power.................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", right, left);
             telemetry.update();
+
+            //linear actuator
+            if (gamepad2.dpad_up) {
+                robot.vertExt.setPower(-1);
+            } else if (gamepad2.dpad_down) {
+                robot.vertExt.setPower(1);
+            } else if (gamepad2.dpad_right) {
+                robot.vertExt.setPower(0);
+
+            }
+
+            //claw grabber thingy
+            if (gamepad1.right_bumper) {//Closed
+                robot.rightClaw.setPosition(0.6);
+                robot.leftClaw.setPosition(0.25);//Works PERFECTLY DALTON (DONT TOUCH)
+
+            } else if (gamepad1.left_bumper) {//Opened
+                //clawOffset = 0.0;
+                //inversly proportional
+                robot.rightClaw.setPosition(0.5);//WORKS PERFECTLY DALTON (DONT TOUCH)
+                robot.leftClaw.setPosition(0.35);
+            }
         }
     }
+    void drive (boolean precise, boolean reverse){
+        double right_scaled = scaleMotor(right, precise);
+        double left_scaled = scaleMotor(left, precise);
 
-    void drive(boolean precise, boolean reverse) {
-        double right_scaled = scaleMotor(right,precise);
-        double left_scaled = scaleMotor(left,precise);
-
-        if(reverse) {
+        if (reverse) {
             double temp = right_scaled;
             right_scaled = -left_scaled;
             left_scaled = -temp;
@@ -116,7 +166,7 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
         robot.leftDrive.setPower(left_scaled);
         robot.leftDrive2.setPower(left_scaled);
     }
-    double scaleMotor(double num, boolean precise) {
+    double scaleMotor ( double num, boolean precise){
         if (num == 0.0)
             return 0.0;
         //For precision mode
@@ -135,3 +185,4 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
         return scaled;
     }
 }
+

@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode;
+/*package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -49,6 +49,7 @@ public class Auto_2019 extends LinearOpMode {
     static final double DRIVE_GEAR_REDUCTION = 1.0;     // This is < 1.0 if geared UP AndyMark Orbital 20
     static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
     static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
+    static final double DRIVE_SPEED = 0.6;
 
     @Override
     public void runOpMode() {
@@ -71,51 +72,53 @@ public class Auto_2019 extends LinearOpMode {
         telemetry.update();
         waitForStart();
 
-    //Encoder method
-    /*public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS) {
+        //Encoder method
+        public void encoderDrive ( double speed, double leftInches, double rightInches,
+        double timeoutS){
 
-        robot.rightDrive.setPower(Math.abs(speed));
-        int newLeftTarget;
-        int newRightTarget;
-        // Ensure that the opmode is still active
-        if (opModeIsActive()) {
-            // Determine new target position, and pass to motor controller
-            newLeftTarget = robot.leftDrive.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
-            newRightTarget = robot.rightDrive.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
-            robot.leftDrive.setTargetPosition(newLeftTarget);
-            robot.rightDrive.setTargetPosition(newRightTarget);
-            robot.leftDrive2.setTargetPosition(newLeftTarget);
-            robot.rightDrive2.setTargetPosition(newRightTarget);
-            // Turn On RUN_TO_POSITION
-            robot.leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.leftDrive2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.rightDrive2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            // reset the timeout time and start motion.
-            runtime.reset();
-            robot.leftDrive.setPower(Math.abs(speed));
-            robot.leftDrive2.setPower(Math.abs(speed));
             robot.rightDrive.setPower(Math.abs(speed));
-            robot.rightDrive2.setPower(Math.abs(speed));
-            while (opModeIsActive() &&
-                    (runtime.seconds() < timeoutS) && (robot.leftDrive.isBusy() && robot.rightDrive.isBusy())) {
-                // Display it for the driver.
-                telemetry.addData("Path1", "Running to %7d :%7d", newLeftTarget, newRightTarget);
-                telemetry.addData("Path2", "Running at %7d :%7d", robot.leftDrive.getCurrentPosition(),
-                        robot.rightDrive.getCurrentPosition());
-                telemetry.update();
+            int newLeftTarget;
+            int newRightTarget;
+            // Ensure that the opmode is still active
+            if (opModeIsActive()) {
+                // Determine new target position, and pass to motor controller
+                newLeftTarget = robot.leftDrive.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
+                newRightTarget = robot.rightDrive.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
+                robot.leftDrive.setTargetPosition(newLeftTarget);
+                robot.rightDrive.setTargetPosition(newRightTarget);
+                robot.leftDrive2.setTargetPosition(newLeftTarget);
+                robot.rightDrive2.setTargetPosition(newRightTarget);
+                // Turn On RUN_TO_POSITION
+                robot.leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                robot.rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                robot.leftDrive2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                robot.rightDrive2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                // reset the timeout time and start motion.
+                runtime.reset();
+                robot.leftDrive.setPower(Math.abs(speed));
+                robot.leftDrive2.setPower(Math.abs(speed));
+                robot.rightDrive.setPower(Math.abs(speed));
+                robot.rightDrive2.setPower(Math.abs(speed));
+                while (opModeIsActive() &&
+                        (runtime.seconds() < timeoutS) && (robot.leftDrive.isBusy() && robot.rightDrive.isBusy())) {
+                    // Display it for the driver.
+                    telemetry.addData("Path1", "Running to %7d :%7d", newLeftTarget, newRightTarget);
+                    telemetry.addData("Path2", "Running at %7d :%7d", robot.leftDrive.getCurrentPosition(),
+                            robot.rightDrive.getCurrentPosition());
+                    telemetry.update();
+                }
+                // Stop all motion;
+                robot.leftDrive.setPower(0);
+                robot.rightDrive.setPower(0);
+                robot.leftDrive2.setPower(0);
+                robot.rightDrive2.setPower(0);
+                // Turn off RUN_TO_POSITION
+                robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.leftDrive2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.rightDrive2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                sleep(delay);
             }
-            // Stop all motion;
-            robot.leftDrive.setPower(0);
-            robot.rightDrive.setPower(0);
-            robot.leftDrive2.setPower(0);
-            robot.rightDrive2.setPower(0);
-            // Turn off RUN_TO_POSITION
-            robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.leftDrive2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.rightDrive2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            sleep(delay);
-        }*/
+        }
     }
-}
+}*/
