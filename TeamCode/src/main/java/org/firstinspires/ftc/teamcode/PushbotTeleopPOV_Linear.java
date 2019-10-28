@@ -39,7 +39,6 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp(name="Pushbot: Teleop POV", group="Pushbot")
 public class PushbotTeleopPOV_Linear extends LinearOpMode {
     // Declare OpMode members.
-    int bob = 0;
     private ElapsedTime runtime = new ElapsedTime();
     static double right;
     static double left;
@@ -185,4 +184,3 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
         return scaled;
     }
 }
-
