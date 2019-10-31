@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
@@ -17,7 +18,7 @@ public class Pushbot_2019 {
     public Servo foundHook2 = null;
     public Servo rightClaw = null;
     public Servo leftClaw = null;
-    public Servo tuckAwayClaw = null;
+    public CRServo tuckAwayClaw = null;
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
@@ -35,13 +36,13 @@ public class Pushbot_2019 {
         foundHook2  = hwMap.get(Servo.class, "foundHook2");
         leftClaw  = hwMap.get(Servo.class, "leftClaw");
         rightClaw  = hwMap.get(Servo.class, "rightClaw");
-        tuckAwayClaw  = hwMap.get(Servo.class, "tuckAwayClaw");
+        tuckAwayClaw  = hwMap.get(CRServo.class, "tuckAwayClaw");
         //set servo to starting position
         foundHook1.setPosition(1.0);
         foundHook2.setPosition(0.0);
-        leftClaw.setPosition(0.5);
+        leftClaw.setPosition(.35);
         rightClaw.setPosition(0.5);
-        tuckAwayClaw.setPosition(1.0);
+        tuckAwayClaw.setPower(-1);
         // Define and Initialize Motors
         leftDrive  = hwMap.get(DcMotor.class, "left_drive");
         rightDrive = hwMap.get(DcMotor.class, "right_drive");
@@ -52,7 +53,7 @@ public class Pushbot_2019 {
         leftDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightDrive.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         leftDrive2.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        rightDrive2.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
+        rightDrive2.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         vertExt.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         // Set all motors to zero power
         leftDrive.setPower(0);

@@ -45,6 +45,7 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
     static double right2;
     static double left2;
     static double foundHook = 1;
+    static double tuckAway = 1;
     Pushbot_2019 robot = new Pushbot_2019();
 
     @Override
@@ -71,24 +72,24 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
             }
             //Tank Drive
             if (mode == 2) {
-                //telemetry.addData("Driving", "false");
+                telemetry.addData("Driving", "false");
                 telemetry.update();
                 right = gamepad1.right_stick_y;
                 left = gamepad1.left_stick_y;
                 boolean precisionMode = false;
-                if (gamepad1.left_trigger != 0)
+                if (gamepad2.left_trigger != 0)
                     precisionMode = true;
                 boolean reverseMode = false;
-                if (gamepad1.right_trigger != 0)
+                if (gamepad2.right_trigger != 0)
                     reverseMode = true;
                 drive(precisionMode, reverseMode);
             } else if (mode == 1) {
                 //Mech Drive
-                //telemetry.addData("Driving", "true");
+                telemetry.addData("Driving", "true");
                 telemetry.update();
                 double r = Math.hypot(-gamepad1.left_stick_x, -gamepad1.left_stick_y);
                 double robotAngle = Math.atan2(-gamepad1.left_stick_y, -gamepad1.left_stick_x) - Math.PI / 4;
-                double rightX = -gamepad1.right_stick_x;
+                double rightX = gamepad1.right_stick_x;
                 final double v1 = r * Math.cos(robotAngle) + rightX;
                 final double v2 = r * Math.sin(robotAngle) - rightX;
                 final double v3 = r * Math.sin(robotAngle) + rightX;
@@ -99,14 +100,12 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
                 robot.rightDrive2.setPower(v4);
             }
 
-            //puts claw in right location
-            robot.tuckAwayClaw.setPosition(0.0);
 
             //foundation hook toggle
-            if (gamepad1.a && foundHook != 0) {
+            if (gamepad2.a && foundHook != 0) {
                 foundHook--;
                 sleep(300);
-            } else if (gamepad1.a) {
+            } else if (gamepad2.a) {
                 foundHook++;
                 sleep(300);
             }
@@ -128,26 +127,51 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
             telemetry.update();
 
             //linear actuator
+            robot.vertExt.setPower(gamepad2.left_stick_y);
+      /*
             if (gamepad2.dpad_up) {
                 robot.vertExt.setPower(-1);
             } else if (gamepad2.dpad_down) {
                 robot.vertExt.setPower(1);
             } else if (gamepad2.dpad_right) {
                 robot.vertExt.setPower(0);
+*/
 
-            }
 
             //claw grabber thingy
             if (gamepad1.right_bumper) {//Closed
-                robot.rightClaw.setPosition(0.6);
-                robot.leftClaw.setPosition(0.25);//Works PERFECTLY DALTON (DONT TOUCH)
+                robot.rightClaw.setPosition(0.65);
+                robot.leftClaw.setPosition(0.2);//Works PERFECTLY DALTON (DONT TOUCH)
 
             } else if (gamepad1.left_bumper) {//Opened
                 //clawOffset = 0.0;
                 //inversly proportional
                 robot.rightClaw.setPosition(0.5);//WORKS PERFECTLY DALTON (DONT TOUCH)
                 robot.leftClaw.setPosition(0.35);
+
+            } else if (gamepad1.left_trigger != 0) {//Opened
+            //clawOffset = 0.0;
+            //inversly proportional
+            robot.rightClaw.setPosition(0.3);//WORKS PERFECTLY DALTON (DONT TOUCH)
+            robot.leftClaw.setPosition(0.55);
             }
+
+            //tuckawayclaw toggle
+            if (gamepad2.x && tuckAway != 0) {
+                tuckAway--;
+                sleep(300);
+            } else if (gamepad2.x) {
+                tuckAway++;
+                sleep(300);
+            }
+
+            if (tuckAway == 0) {
+                robot.tuckAwayClaw.setPower(1.0);
+            }
+            if (tuckAway != 0) {
+                robot.tuckAwayClaw.setPower(0.0);
+            }
+
         }
     }
     void drive (boolean precise, boolean reverse){
@@ -184,3 +208,4 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
         return scaled;
     }
 }
+
