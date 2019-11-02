@@ -42,7 +42,7 @@ public class Pushbot_2019 {
         foundHook2.setPosition(0.0);
         leftClaw.setPosition(.35);
         rightClaw.setPosition(0.5);
-        tuckAwayClaw.setPower(-1);
+        tuckAwayClaw.setPower(.8);
         // Define and Initialize Motors
         leftDrive  = hwMap.get(DcMotor.class, "left_drive");
         rightDrive = hwMap.get(DcMotor.class, "right_drive");

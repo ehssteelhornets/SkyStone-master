@@ -166,10 +166,12 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
             }
 
             if (tuckAway == 0) {
-                robot.tuckAwayClaw.setPower(1.0);
+                robot.tuckAwayClaw.setPower(.8);
             }
             if (tuckAway != 0) {
-                robot.tuckAwayClaw.setPower(0.0);
+                robot.tuckAwayClaw.setPower(-.4);
+
+
             }
 
         }
