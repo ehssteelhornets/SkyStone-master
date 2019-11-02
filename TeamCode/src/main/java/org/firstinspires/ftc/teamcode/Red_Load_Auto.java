@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
-@Autonomous(name="Blue_Load_Auto", group ="Pushbot")
-public class Blue_Load_Auto extends LinearOpMode {
+@Autonomous(name="Red_Load_Auto", group ="Pushbot")
+public class Red_Load_Auto extends LinearOpMode {
     Pushbot_2019 robot = new Pushbot_2019();   // Use a Pushbot's hardware
     private ElapsedTime runtime = new ElapsedTime();
     // eg: AndyMark Orbital 20 Motor Encoder
