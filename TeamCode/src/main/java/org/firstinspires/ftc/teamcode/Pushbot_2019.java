@@ -37,15 +37,15 @@ public class Pushbot_2019 {
         foundHook2  = hwMap.get(Servo.class, "foundHook2");
         leftClaw  = hwMap.get(Servo.class, "leftClaw");
         rightClaw  = hwMap.get(Servo.class, "rightClaw");
-        tuckAwayClaw1  = hwMap.get(CRServo.class, "tuckAwayClaw");
-        tuckAwayClaw2  = hwMap.get(CRServo.class, "tuckAwayClaw");
+        tuckAwayClaw1  = hwMap.get(CRServo.class, "tuckAwayClaw1");
+        tuckAwayClaw2  = hwMap.get(CRServo.class, "tuckAwayClaw2");
         //set servo to starting position
         foundHook1.setPosition(1.0);
         foundHook2.setPosition(0.0);
         leftClaw.setPosition(.35);
         rightClaw.setPosition(0.5);
         tuckAwayClaw1.setPower(.8);
-        tuckAwayClaw2.setPower(.8);
+        tuckAwayClaw2.setPower(-.4);
         // Define and Initialize Motors
         leftDrive  = hwMap.get(DcMotor.class, "left_drive");
         rightDrive = hwMap.get(DcMotor.class, "right_drive");
