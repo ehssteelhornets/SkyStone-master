@@ -19,7 +19,7 @@ public class Simple_Auto_FWRD extends LinearOpMode {
     float hsvValues[] = {0F, 0F, 0F};
     final float values[] = hsvValues;
     final double SCALE_FACTOR = 255;
-    int test = 0; 
+    int test = 0;
     static final double DIST_TO_FOUNDATION = 30.75;
 
     @Override
