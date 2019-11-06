@@ -11,12 +11,12 @@ import com.qualcomm.robotcore.util.Range;
 public class PushbotTeleopPOV_Linear extends LinearOpMode {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    static double right;
-    static double left;
-    static double right2;
-    static double left2;
-    static double foundHook = 1;
-    static double tuckAway = 1;
+    private static double right;
+    private static double left;
+    private static double right2;
+    private static double left2;
+    private static double foundHook = 1;
+    private static double tuckAway = 1;
     Pushbot_2019 robot = new Pushbot_2019();
 
     @Override
@@ -85,11 +85,15 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
                 robot.foundHook1.setPosition(0.0);
                 robot.foundHook2.setPosition(1.0);
             }
+            telemetry.addData("Raising foundation hooks", "true");
+            telemetry.update();
+
             if (foundHook == 0) {
                 robot.foundHook1.setPosition(1.0);
                 robot.foundHook2.setPosition(0.0);
             }
-
+            telemetry.addData("Lowering foundation hooks", "true");
+            telemetry.update();
 
             //Controls linear actuator
             // Show the elapsed game time and wheel power.................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
@@ -99,6 +103,8 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
 
             //linear actuator
             robot.vertExt.setPower(gamepad2.left_stick_y);
+            telemetry.addData("Moving the linear actuator", "true");
+            telemetry.update();
       /*
             if (gamepad2.dpad_up) {
                 robot.vertExt.setPower(-1);
@@ -113,18 +119,24 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
             if (gamepad1.right_bumper) {//Closed
                 robot.rightClaw.setPosition(0.65);
                 robot.leftClaw.setPosition(0.2);//Works PERFECTLY DALTON (DONT TOUCH)
-
-            } else if (gamepad1.left_bumper) {//Opened
+                telemetry.addData("Closing grabber", "true");
+                telemetry.update();
+            }
+            else if (gamepad1.left_bumper) {//Opened
                 //clawOffset = 0.0;
-                //inversly proportional
+                //inversely proportional
                 robot.rightClaw.setPosition(0.5);//WORKS PERFECTLY DALTON (DONT TOUCH)
                 robot.leftClaw.setPosition(0.35);
-
-            } else if (gamepad1.left_trigger != 0) {//Opened
+                telemetry.addData("Opening grabber moderate amount", "true");
+                telemetry.update();
+            }
+            else if (gamepad1.left_trigger != 0) {//Opened
             //clawOffset = 0.0;
-            //inversly proportional
-            robot.rightClaw.setPosition(0.3);//WORKS PERFECTLY DALTON (DONT TOUCH)
-            robot.leftClaw.setPosition(0.55);
+            //inversely proportional
+                robot.rightClaw.setPosition(0.3);//WORKS PERFECTLY DALTON (DONT TOUCH)
+                robot.leftClaw.setPosition(0.55);
+                telemetry.addData("Opening grabber large amount", "true");
+                telemetry.update();
             }
 
             //tuckawayclaw toggle
@@ -140,13 +152,15 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
                 robot.tuckAwayClaw1.setPower(.8);
                 robot.tuckAwayClaw2.setPower(-.4);
             }
+            telemetry.addData("moving tuckAway claw out", "true");
+            telemetry.update();
+
             if (tuckAway != 0) {
                 robot.tuckAwayClaw1.setPower(-.4);
                 robot.tuckAwayClaw2.setPower(.8);
-
-
             }
-
+            telemetry.addData("moving tuckAway claw in", "true");
+            telemetry.update();
         }
     }
     void drive (boolean precise, boolean reverse){
