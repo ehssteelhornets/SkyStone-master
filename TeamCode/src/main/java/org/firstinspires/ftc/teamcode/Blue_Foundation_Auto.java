@@ -101,8 +101,8 @@ public class Blue_Foundation_Auto extends LinearOpMode {
                 robot.rightDrive2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 // reset the timeout time and start motion.
                 runtime.reset();
-                robot.leftDrive.setPower(Math.abs(speed*.85));
-                robot.rightDrive.setPower(Math.abs(speed*.85));
+                robot.leftDrive.setPower(Math.abs(speed*.4));
+                robot.rightDrive.setPower(Math.abs(speed*.4));
                 robot.leftDrive2.setPower(Math.abs(speed));
                 robot.rightDrive2.setPower(Math.abs(speed));
                 while (opModeIsActive() &&
