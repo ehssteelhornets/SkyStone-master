@@ -66,9 +66,9 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
                 final double v3 = r * Math.sin(robotAngle) + rightX;
                 final double v4 = r * Math.cos(robotAngle) - rightX;
                 robot.leftDrive.setPower(v1);
-                robot.rightDrive.setPower(v2);
+                robot.rightDrive.setPower(v2 * .5);
                 robot.leftDrive2.setPower(v3);
-                robot.rightDrive2.setPower(v4);
+                robot.rightDrive2.setPower(v4 * .5);
             }
 
 

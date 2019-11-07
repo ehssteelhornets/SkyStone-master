@@ -20,7 +20,7 @@ public class Blue_Foundation_Auto extends LinearOpMode {
     final float values[] = hsvValues;
     final double SCALE_FACTOR = 255;
     int test = 0;
-    static final double DIST_TO_FOUNDATION = 25;
+    static final double DIST_TO_FOUNDATION = 18;
 
     @Override
     public void runOpMode() {
@@ -48,8 +48,8 @@ public class Blue_Foundation_Auto extends LinearOpMode {
         //Drives forward to foundation
         encoderDrive(1, -DIST_TO_FOUNDATION, -DIST_TO_FOUNDATION, 5.0);
         //puts down foundation Hooks
-        robot.foundHook1.setPosition(1.0);
-        robot.foundHook2.setPosition(0.0);
+        robot.foundHook1.setPosition(0.0);
+        robot.foundHook2.setPosition(1.0);
         //Pulls Foundation backward partially
         //encoderDrive(1, (DIST_TO_FOUNDATION + 10), (DIST_TO_FOUNDATION + 10), 5.0);
         //Rotate CCW 90 deg
@@ -101,10 +101,10 @@ public class Blue_Foundation_Auto extends LinearOpMode {
                 robot.rightDrive2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 // reset the timeout time and start motion.
                 runtime.reset();
-                robot.leftDrive.setPower(Math.abs(speed*.4));
-                robot.rightDrive.setPower(Math.abs(speed*.4));
+                robot.leftDrive.setPower(Math.abs(speed));
+                robot.rightDrive.setPower(Math.abs(speed * .5));
                 robot.leftDrive2.setPower(Math.abs(speed));
-                robot.rightDrive2.setPower(Math.abs(speed));
+                robot.rightDrive2.setPower(Math.abs(speed * .5));
                 while (opModeIsActive() &&
                         (runtime.seconds() < timeoutS) &&
                         (robot.leftDrive.isBusy() && robot.rightDrive.isBusy())) {
