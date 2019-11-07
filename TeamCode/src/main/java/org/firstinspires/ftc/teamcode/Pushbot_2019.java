@@ -29,7 +29,7 @@ public class Pushbot_2019 {
 
     }
     /* Initialize standard Hardware interfaces */
-    public void init(HardwareMap  ahwMap) {
+    public void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
         hwMap = ahwMap;
         //Define and Initialize servos

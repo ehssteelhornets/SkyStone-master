@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
-@Autonomous(name="Blue_Foundation_Auto", group ="Pushbot")
-public class Blue_Foundation_Auto extends LinearOpMode {
+@Autonomous(name="Rotation_Test", group ="Pushbot")
+public class Rotation_Test extends LinearOpMode {
     Pushbot_2019 robot = new Pushbot_2019();   // Use a Pushbot's hardware
     private ElapsedTime runtime = new ElapsedTime();
     // eg: AndyMark Orbital 20 Motor Encoder
@@ -20,7 +20,7 @@ public class Blue_Foundation_Auto extends LinearOpMode {
     final float values[] = hsvValues;
     final double SCALE_FACTOR = 255;
     int test = 0;
-    static final double DIST_TO_FOUNDATION = 25;
+    static final double DIST_TO_FOUNDATION = 30.75;
 
     @Override
     public void runOpMode() {
@@ -42,25 +42,9 @@ public class Blue_Foundation_Auto extends LinearOpMode {
                 robot.leftDrive.getCurrentPosition(),
                 robot.rightDrive.getCurrentPosition());
         telemetry.update();
-
-
         waitForStart();
-        //Drives forward to foundation
-        encoderDrive(1, -DIST_TO_FOUNDATION, -DIST_TO_FOUNDATION, 5.0);
-        //puts down foundation Hooks
-        robot.foundHook1.setPosition(1.0);
-        robot.foundHook2.setPosition(0.0);
-        //Pulls Foundation backward partially
-        //encoderDrive(1, (DIST_TO_FOUNDATION + 10), (DIST_TO_FOUNDATION + 10), 5.0);
-        //Rotate CCW 90 deg
-        //encoderDrive(1, (WHEEL_CIRCUMFERENCE_INCHES), (-WHEEL_CIRCUMFERENCE_INCHES), 5.0);
-        //Release Foundation
-        //robot.foundHook1.setPosition(0.0);
-        //robot.foundHook2.setPosition(1.0);
-        //Rotate CW 180 deg
-        //encoderDrive(1, (2 * -WHEEL_CIRCUMFERENCE_INCHES), (2 * WHEEL_CIRCUMFERENCE_INCHES), 5.0);
-        //FWD to line
-        //encoderDrive(1, (30), (30), 5.0);
+        //rotates
+        encoderDrive(1, -WHEEL_CIRCUMFERENCE_INCHES, WHEEL_CIRCUMFERENCE_INCHES, 5.0);
 
 
     }
@@ -101,8 +85,8 @@ public class Blue_Foundation_Auto extends LinearOpMode {
                 robot.rightDrive2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 // reset the timeout time and start motion.
                 runtime.reset();
-                robot.leftDrive.setPower(Math.abs(speed*.85));
-                robot.rightDrive.setPower(Math.abs(speed*.85));
+                robot.leftDrive.setPower(Math.abs(speed));
+                robot.rightDrive.setPower(Math.abs(speed));
                 robot.leftDrive2.setPower(Math.abs(speed));
                 robot.rightDrive2.setPower(Math.abs(speed));
                 while (opModeIsActive() &&

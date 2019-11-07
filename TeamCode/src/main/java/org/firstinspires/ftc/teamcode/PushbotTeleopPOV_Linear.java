@@ -1,32 +1,3 @@
-/* Copyright (c) 2017 FIRST. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted (subject to the limitations in the disclaimer below) provided that
- * the following conditions are met:
- *
- * Redistributions of source code must retain the above copyright notice, this list
- * of conditions and the following disclaimer.
- *
- * Redistributions in binary form must reproduce the above copyright notice, this
- * list of conditions and the following disclaimer in the documentation and/or
- * other materials provided with the distribution.
- *
- * Neither the name of FIRST nor the names of its contributors may be used to endorse or
- * promote products derived from this software without specific prior written permission.
- *
- * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS
- * LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
- * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -40,12 +11,12 @@ import com.qualcomm.robotcore.util.Range;
 public class PushbotTeleopPOV_Linear extends LinearOpMode {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    static double right;
-    static double left;
-    static double right2;
-    static double left2;
-    static double foundHook = 1;
-    static double tuckAway = 1;
+    private static double right;
+    private static double left;
+    private static double right2;
+    private static double left2;
+    private static double foundHook = 1;
+    private static double tuckAway = 1;
     Pushbot_2019 robot = new Pushbot_2019();
 
     @Override
@@ -114,11 +85,15 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
                 robot.foundHook1.setPosition(0.0);
                 robot.foundHook2.setPosition(1.0);
             }
+            telemetry.addData("Raising foundation hooks", "true");
+            telemetry.update();
+
             if (foundHook == 0) {
                 robot.foundHook1.setPosition(1.0);
                 robot.foundHook2.setPosition(0.0);
             }
-
+            telemetry.addData("Lowering foundation hooks", "true");
+            telemetry.update();
 
             //Controls linear actuator
             // Show the elapsed game time and wheel power
@@ -128,6 +103,8 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
 
             //linear actuator
             robot.vertExt.setPower(gamepad2.left_stick_y);
+            telemetry.addData("Moving the linear actuator", "true");
+            telemetry.update();
       /*
             if (gamepad2.dpad_up) {
                 robot.vertExt.setPower(-1);
@@ -142,18 +119,24 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
             if (gamepad1.right_bumper) {//Closed
                 robot.rightClaw.setPosition(0.65);
                 robot.leftClaw.setPosition(0.2);//Works PERFECTLY DALTON (DONT TOUCH)
-
-            } else if (gamepad1.left_bumper) {//Opened
+                telemetry.addData("Closing grabber", "true");
+                telemetry.update();
+            }
+            else if (gamepad1.left_bumper) {//Opened
                 //clawOffset = 0.0;
-                //inversly proportional
+                //inversely proportional
                 robot.rightClaw.setPosition(0.5);//WORKS PERFECTLY DALTON (DONT TOUCH)
                 robot.leftClaw.setPosition(0.35);
-
-            } else if (gamepad1.left_trigger != 0) {//Opened
+                telemetry.addData("Opening grabber moderate amount", "true");
+                telemetry.update();
+            }
+            else if (gamepad1.left_trigger != 0) {//Opened
             //clawOffset = 0.0;
-            //inversly proportional
-            robot.rightClaw.setPosition(0.3);//WORKS PERFECTLY DALTON (DONT TOUCH)
-            robot.leftClaw.setPosition(0.55);
+            //inversely proportional
+                robot.rightClaw.setPosition(0.3);//WORKS PERFECTLY DALTON (DONT TOUCH)
+                robot.leftClaw.setPosition(0.55);
+                telemetry.addData("Opening grabber large amount", "true");
+                telemetry.update();
             }
 
             //tuckawayclaw toggle
@@ -169,13 +152,15 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
                 robot.tuckAwayClaw1.setPower(.8);
                 robot.tuckAwayClaw2.setPower(-.4);
             }
+            telemetry.addData("moving tuckAway claw out", "true");
+            telemetry.update();
+
             if (tuckAway != 0) {
                 robot.tuckAwayClaw1.setPower(-.4);
                 robot.tuckAwayClaw2.setPower(.8);
-
-
             }
-
+            telemetry.addData("moving tuckAway claw in", "true");
+            telemetry.update();
         }
     }
     void drive (boolean precise, boolean reverse){
