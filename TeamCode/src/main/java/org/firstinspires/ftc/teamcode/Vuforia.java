@@ -2,6 +2,9 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.vuforia.HINT;
+
+import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
@@ -29,7 +32,12 @@ public class Vuforia extends LinearOpMode
     private OpenGLMatrix lastKnownLocation;
     private OpenGLMatrix phoneLocation;
 
-    private static final String VUFORIA_KEY = "AVBEWl3/////AAAAGbcR3zLzokcgvluieL+X7sUZchFxSNixRNcAWxR0bP9U+U43LsdX44KA/uRn41WeKGbwe4gTQcOdJve3abc+3SFCDWjM5NdDbjZkEutO2JcIigwn7jIU41jL6sXmCekHzJ7tW8F2B1JfISG6WP9KpbcD9F9BfMHnvBljUyT8nLP89/pqN0r8Zy2L5n9avC/LchzRCsMnvalZKZyYJkmlfNS8o4lKSOGzP2iEWx5a5J02jJiAwgPmsIjGKBWpUdwqB4fRlLLNxUMXKtRBIMEaLPn1+tdjMIIQX/fdf7q50MIWPdTdDdKJlbVHCiGrQa46ad5SA2+hFfsCglv8GW30Peuom9O5lGOWzjxSdcAv/H2W"; // Insert your own key here
+    private static final String VUFORIA_KEY = "AVBEWl3/////AAAAGbcR3zLzokcgvluieL+X7sUZchFxSNixRNcAWxR0bP9U+U43LsdX44KA/uRn41WeKGbwe4gTQcOdJve3abc+3SFCDWjM5NdDbjZkEutO2JcIigwn7jIU41jL6sXmCekHzJ7tW8F2B1JfISG6WP9KpbcD9F9BfMHnvBljUyT8nLP89/pqN0r8Zy2L5n9avC/LchzRCsMnvalZKZyYJkmlfNS8o4lKSOGzP2iEWx5a5J02jJiAwgPmsIjGKBWpUdwqB4fRlLLNxUMXKtRBIMEaLPn1+tdjMIIQX/fdf7q50MIWPdTdDdKJlbVHCiGrQa46ad5SA2+hFfsCglv8GW30Peuom9O5lGOWzjxSdcAv/H2W";
+
+
+    private float robotX = 0;
+    private float robotY = 0;
+    private float robotAngle = 0;
 
     public void runOpMode() throws InterruptedException
     {
@@ -46,6 +54,23 @@ public class Vuforia extends LinearOpMode
 
         while(opModeIsActive())
         {
+            // Ask the listener for the latest information on where the robot is
+            OpenGLMatrix latestLocation = listener.getUpdatedRobotLocation();
+
+            // The listener will sometimes return null, so we check for that to prevent errors
+            if(latestLocation != null)
+                lastKnownLocation = latestLocation;
+
+            float[] coordinates = lastKnownLocation.getTranslation().getData();
+
+            robotX = coordinates[0];
+            robotY = coordinates[1];
+            robotAngle = Orientation.getOrientation(lastKnownLocation, AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES).thirdAngle;
+
+            // Send information about whether the target is visible, and where the robot is
+            telemetry.addData("Tracking " + target.getName(), listener.isVisible());
+            telemetry.addData("Last Known Location", formatMatrix(lastKnownLocation));
+
             // Send telemetry and idle to let hardware catch up
             telemetry.update();
             idle();
@@ -59,6 +84,24 @@ public class Vuforia extends LinearOpMode
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
         parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
         parameters.useExtendedTracking = false;
+        vuforiaLocalizer = ClassFactory.createVuforiaLocalizer(parameters);
+
+        // These are the vision targets that we want to use
+        // The string needs to be the name of the appropriate .xml file in the assets folder
+        visionTargets = vuforiaLocalizer.loadTrackablesFromAsset("Skystone");
+        //Vuforia.setHint(HINT.HINT_MAX_SIMULTANEOUS_IMAGE_TARGETS, 4);
+
+        // Setup the target to be tracked
+        target = visionTargets.get(9); //
+        target.setName("BluePerimeterTgt1");
+        target.setLocation(createMatrix(0, 500, 0, 90, 0, 90));
+
+        // Set phone location on robot
+        phoneLocation = createMatrix(0, 225, 0, 90, 0, 0);
+
+        // Setup listener and inform it of phone information
+        listener = (VuforiaTrackableDefaultListener) target.getListener();
+        listener.setPhoneInformation(phoneLocation, parameters.cameraDirection);
     }
 
     // Creates a matrix for determining the locations and orientations of objects
