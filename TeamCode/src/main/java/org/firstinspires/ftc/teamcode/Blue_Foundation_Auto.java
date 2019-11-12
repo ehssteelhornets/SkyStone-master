@@ -20,7 +20,7 @@ public class Blue_Foundation_Auto extends LinearOpMode {
     final float values[] = hsvValues;
     final double SCALE_FACTOR = 255;
     int test = 0;
-    static final double DIST_TO_FOUNDATION = 18;
+    static final double DIST_TO_FOUNDATION = 21;
 
     @Override
     public void runOpMode() {
@@ -45,22 +45,24 @@ public class Blue_Foundation_Auto extends LinearOpMode {
 
 
         waitForStart();
+        robot.tuckAwayClaw1.setPower(.8);
+        robot.tuckAwayClaw2.setPower(-.4);
         //Drives forward to foundation
         encoderDrive(1, -DIST_TO_FOUNDATION, -DIST_TO_FOUNDATION, 5.0);
         //puts down foundation Hooks
         robot.foundHook1.setPosition(0.0);
         robot.foundHook2.setPosition(1.0);
         //Pulls Foundation backward partially
-        //encoderDrive(1, (DIST_TO_FOUNDATION + 10), (DIST_TO_FOUNDATION + 10), 5.0);
+        encoderDrive(1, (DIST_TO_FOUNDATION - 10), (DIST_TO_FOUNDATION - 10), 5.0);
         //Rotate CCW 90 deg
-        //encoderDrive(1, (WHEEL_CIRCUMFERENCE_INCHES), (-WHEEL_CIRCUMFERENCE_INCHES), 5.0);
+        encoderDrive(1, (-WHEEL_CIRCUMFERENCE_INCHES), (WHEEL_CIRCUMFERENCE_INCHES), 5.0);
         //Release Foundation
-        //robot.foundHook1.setPosition(0.0);
-        //robot.foundHook2.setPosition(1.0);
+        robot.foundHook1.setPosition(0.0);
+        robot.foundHook2.setPosition(1.0);
         //Rotate CW 180 deg
         //encoderDrive(1, (2 * -WHEEL_CIRCUMFERENCE_INCHES), (2 * WHEEL_CIRCUMFERENCE_INCHES), 5.0);
         //FWD to line
-        //encoderDrive(1, (30), (30), 5.0);
+        encoderDrive(1, (30), (30), 5.0);
 
 
     }
@@ -102,9 +104,9 @@ public class Blue_Foundation_Auto extends LinearOpMode {
                 // reset the timeout time and start motion.
                 runtime.reset();
                 robot.leftDrive.setPower(Math.abs(speed));
-                robot.rightDrive.setPower(Math.abs(speed * .5));
+                robot.rightDrive.setPower(Math.abs(speed) * .5);
                 robot.leftDrive2.setPower(Math.abs(speed));
-                robot.rightDrive2.setPower(Math.abs(speed * .5));
+                robot.rightDrive2.setPower(Math.abs(speed) * .5);
                 while (opModeIsActive() &&
                         (runtime.seconds() < timeoutS) &&
                         (robot.leftDrive.isBusy() && robot.rightDrive.isBusy())) {
