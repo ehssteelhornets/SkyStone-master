@@ -44,7 +44,9 @@ public class Simple_Auto_FWRD extends LinearOpMode {
         telemetry.update();
         waitForStart();
         //Drives forward to foundation
-        encoderDrive(1,30,30,5);
+        encoderDrive(1,30,30,2);
+        sleep(2000);
+        encoderDrive(1,9999,9999,2);
 
     }
 //Encoder method

@@ -9,20 +9,21 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 public class Pushbot_2019 {
-    public DcMotor leftDrive   = null;
-    public DcMotor  rightDrive  = null;
-    public DcMotor  leftDrive2   = null;
-    public DcMotor  rightDrive2  = null;
-    public DcMotor vertExt = null;
-    public Servo foundHook1 = null;
-    public Servo foundHook2 = null;
-    public Servo rightClaw = null;
-    public Servo leftClaw = null;
-    public CRServo tuckAwayClaw1 = null;
-    public CRServo tuckAwayClaw2 = null;
+    public DcMotor leftDrive;
+    public DcMotor  rightDrive;
+    public DcMotor  leftDrive2;
+    public DcMotor  rightDrive2;
+    public DcMotor vertExt;
+    public DcMotor tapeExt;
+    public Servo foundHook1;
+    public Servo foundHook2;
+    public Servo rightClaw;
+    public Servo leftClaw;
+    public CRServo tuckAwayClaw1;
+    public CRServo tuckAwayClaw2;
 
     /* local OpMode members. */
-    HardwareMap hwMap           =  null;
+    HardwareMap hwMap;
     private ElapsedTime period  = new ElapsedTime();
     /* Constructor */
     public Pushbot_2019(){
@@ -44,26 +45,29 @@ public class Pushbot_2019 {
         foundHook2.setPosition(0.0);
         leftClaw.setPosition(.35);
         rightClaw.setPosition(0.5);
-        tuckAwayClaw1.setPower(.8);
-        tuckAwayClaw2.setPower(-.4);
+        tuckAwayClaw1.setPower(-.4);
+        tuckAwayClaw2.setPower(.8);
         // Define and Initialize Motors
         leftDrive  = hwMap.get(DcMotor.class, "left_drive");
         rightDrive = hwMap.get(DcMotor.class, "right_drive");
         leftDrive2 = hwMap.get(DcMotor.class, "left_drive2");
         rightDrive2 = hwMap.get(DcMotor.class, "right_drive2");
         vertExt = hwMap.get(DcMotor.class, "vertExt");
+        tapeExt = hwMap.get(DcMotor.class, "tapeExt");
         //Set motor direction
-        leftDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
+        leftDrive.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         rightDrive.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
-        leftDrive2.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
+        leftDrive2.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         rightDrive2.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         vertExt.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
+        tapeExt.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         // Set all motors to zero power
         leftDrive.setPower(0);
         rightDrive.setPower(0);
         rightDrive2.setPower(0);
         leftDrive2.setPower(0);
         vertExt.setPower(0);
+        tapeExt.setPower(0);
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
         leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

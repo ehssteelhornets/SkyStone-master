@@ -66,9 +66,9 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
                 final double v3 = r * Math.sin(robotAngle) + rightX;
                 final double v4 = r * Math.cos(robotAngle) - rightX;
                 robot.leftDrive.setPower(v1);
-                robot.rightDrive.setPower(v2 * .5);
+                robot.rightDrive.setPower(v2);
                 robot.leftDrive2.setPower(v3);
-                robot.rightDrive2.setPower(v4 * .5);
+                robot.rightDrive2.setPower(v4);
             }
 
 
@@ -104,6 +104,11 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
             //linear actuator
             robot.vertExt.setPower(gamepad2.left_stick_y);
             telemetry.addData("Moving the linear actuator", "true");
+            telemetry.update();
+
+            //tape extender
+            robot.tapeExt.setPower(gamepad2.right_stick_y);
+            telemetry.addData("Moving the tape extender", "true");
             telemetry.update();
       /*
             if (gamepad2.dpad_up) {
@@ -156,8 +161,8 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
             telemetry.update();
 
             if (tuckAway != 0) {
-                robot.tuckAwayClaw1.setPower(-.4);
-                robot.tuckAwayClaw2.setPower(.8);
+                robot.tuckAwayClaw1.setPower(-.5);
+                robot.tuckAwayClaw2.setPower(.9);
             }
             telemetry.addData("moving tuckAway claw in", "true");
             telemetry.update();
