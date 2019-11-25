@@ -20,7 +20,7 @@ public class Blue_Foundation_Auto extends LinearOpMode {
     final float values[] = hsvValues;
     final double SCALE_FACTOR = 255;
     int test = 0;
-    static final double DIST_TO_FOUNDATION = 21;
+    static final double DIST_TO_FOUNDATION = 12;
 
     @Override
     public void runOpMode() {
@@ -45,26 +45,34 @@ public class Blue_Foundation_Auto extends LinearOpMode {
 
 
         waitForStart();
-        robot.tuckAwayClaw1.setPower(.8);
-        robot.tuckAwayClaw2.setPower(-.4);
+        robot.tuckAwayClaw1.setPower(-.4);
+        robot.tuckAwayClaw2.setPower(.8);
         //Drives forward to foundation
-        encoderDrive(1, -DIST_TO_FOUNDATION, -DIST_TO_FOUNDATION, 5.0);
+        encoderDrive(1, -DIST_TO_FOUNDATION, -DIST_TO_FOUNDATION, 1.0);
+        sleep(500);
         //puts down foundation Hooks
         robot.foundHook1.setPosition(0.0);
         robot.foundHook2.setPosition(1.0);
+        sleep(1000);
         //Pulls Foundation backward partially
-        encoderDrive(1, (DIST_TO_FOUNDATION - 10), (DIST_TO_FOUNDATION - 10), 5.0);
+        encoderDrive(1, (DIST_TO_FOUNDATION), (DIST_TO_FOUNDATION), 0.9);
+        sleep(700);
         //Rotate CCW 90 deg
-        encoderDrive(1, (-WHEEL_CIRCUMFERENCE_INCHES), (WHEEL_CIRCUMFERENCE_INCHES), 5.0);
+        encoderDrive(0.5, (-WHEEL_CIRCUMFERENCE_INCHES), (WHEEL_CIRCUMFERENCE_INCHES), 2.5);
+        sleep(700);
+        encoderDrive(1, -DIST_TO_FOUNDATION, -DIST_TO_FOUNDATION, 0.2);
+        sleep(400);
         //Release Foundation
-        robot.foundHook1.setPosition(0.0);
-        robot.foundHook2.setPosition(1.0);
+        robot.foundHook1.setPosition(1.0);
+        robot.foundHook2.setPosition(0.0);
+        sleep(400);
+        encoderDrive(0.5, (-WHEEL_CIRCUMFERENCE_INCHES), (WHEEL_CIRCUMFERENCE_INCHES), 2.5);
+        sleep(300);
         //Rotate CW 180 deg
-        //encoderDrive(1, (2 * -WHEEL_CIRCUMFERENCE_INCHES), (2 * WHEEL_CIRCUMFERENCE_INCHES), 5.0);
+        encoderDrive(1, (DIST_TO_FOUNDATION), (DIST_TO_FOUNDATION), 0.8);
+        sleep(300);
         //FWD to line
-        encoderDrive(1, (30), (30), 5.0);
-
-
+        //encoderDrive(1, (30), (30), 5.0);
     }
 //Encoder method
 // Note: Reverse movement is obtained by setting a negative distance (not speed)
@@ -104,9 +112,9 @@ public class Blue_Foundation_Auto extends LinearOpMode {
                 // reset the timeout time and start motion.
                 runtime.reset();
                 robot.leftDrive.setPower(Math.abs(speed));
-                robot.rightDrive.setPower(Math.abs(speed) * .5);
+                robot.rightDrive.setPower(Math.abs(speed));
                 robot.leftDrive2.setPower(Math.abs(speed));
-                robot.rightDrive2.setPower(Math.abs(speed) * .5);
+                robot.rightDrive2.setPower(Math.abs(speed));
                 while (opModeIsActive() &&
                         (runtime.seconds() < timeoutS) &&
                         (robot.leftDrive.isBusy() && robot.rightDrive.isBusy())) {
