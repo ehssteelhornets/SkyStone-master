@@ -146,4 +146,19 @@ public class Blue_Foundation_Auto extends LinearOpMode {
             telemetry.update();
         }
     }
+
+    public void drive(char direction, double time, double speed) {
+        if(direction == 'F') {
+            encoderDrive(speed, 1, 1, time); //Forward
+        } else if(direction == 'L') {
+            encoderDrive(speed, -1, 1, time); //Turn left
+        } else if(direction == 'B') {
+            encoderDrive(speed, -1, -1, time); //Backward
+        } else if(direction == 'R') {
+            encoderDrive(speed, 1, -1, time); //Turn right
+        } else {
+            telemetry.addData("Something fricked", direction);
+            telemetry.update();
+        }
+    }
 }
