@@ -55,21 +55,21 @@ public class Blue_Foundation_Auto extends LinearOpMode {
         robot.foundHook2.setPosition(1.0);
         sleep(1000);
         //Pulls Foundation backward partially
-        encoderDrive(1, (DIST_TO_FOUNDATION), (DIST_TO_FOUNDATION), 0.9);
+        encoderDrive(1, (DIST_TO_FOUNDATION), (DIST_TO_FOUNDATION), 1.1);
         sleep(700);
         //Rotate CCW 90 deg
-        encoderDrive(0.5, (-WHEEL_CIRCUMFERENCE_INCHES), (WHEEL_CIRCUMFERENCE_INCHES), 2.5);
+        encoderDrive(0.5, (-WHEEL_CIRCUMFERENCE_INCHES), (WHEEL_CIRCUMFERENCE_INCHES), 1.7);
         sleep(700);
-        encoderDrive(1, -DIST_TO_FOUNDATION, -DIST_TO_FOUNDATION, 0.2);
-        sleep(400);
+        encoderDrive(1, (-DIST_TO_FOUNDATION), (-DIST_TO_FOUNDATION), 0.8);
+        //encoderDrive(1, -DIST_TO_FOUNDATION, -DIST_TO_FOUNDATION, 0.2);
+        //sleep(400);
         //Release Foundation
         robot.foundHook1.setPosition(1.0);
         robot.foundHook2.setPosition(0.0);
         sleep(400);
-        encoderDrive(0.5, (-WHEEL_CIRCUMFERENCE_INCHES), (WHEEL_CIRCUMFERENCE_INCHES), 2.5);
-        sleep(300);
-        //Rotate CW 180 deg
-        encoderDrive(1, (DIST_TO_FOUNDATION), (DIST_TO_FOUNDATION), 0.8);
+        //encoderDrive(0.5, (-WHEEL_CIRCUMFERENCE_INCHES), (WHEEL_CIRCUMFERENCE_INCHES), 2.5);
+        //sleep(300);
+        encoderDrive(1, (DIST_TO_FOUNDATION), (DIST_TO_FOUNDATION), 1.2);
         sleep(300);
         //FWD to line
         //encoderDrive(1, (30), (30), 5.0);
