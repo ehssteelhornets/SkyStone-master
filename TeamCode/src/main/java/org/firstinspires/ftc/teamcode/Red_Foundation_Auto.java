@@ -20,7 +20,7 @@ public class Red_Foundation_Auto extends LinearOpMode {
     final float values[] = hsvValues;
     final double SCALE_FACTOR = 255;
     int test = 0;
-    static final double DIST_TO_FOUNDATION = 30.75;
+    static final double DIST_TO_FOUNDATION = 12;
 
     @Override
     public void runOpMode() {
@@ -42,25 +42,37 @@ public class Red_Foundation_Auto extends LinearOpMode {
                 robot.leftDrive.getCurrentPosition(),
                 robot.rightDrive.getCurrentPosition());
         telemetry.update();
+
+
         waitForStart();
+        robot.tuckAwayClaw1.setPower(-.4);
+        robot.tuckAwayClaw2.setPower(.8);
         //Drives forward to foundation
-        encoderDrive(1, DIST_TO_FOUNDATION, DIST_TO_FOUNDATION, 5.0);
+        encoderDrive(1, -DIST_TO_FOUNDATION, -DIST_TO_FOUNDATION, 1.0);
+        sleep(500);
         //puts down foundation Hooks
-        robot.foundHook1.setPosition(1.0);
-        robot.foundHook2.setPosition(0.0);
-        //Pulls Foundation backward partially
-        encoderDrive(1, (DIST_TO_FOUNDATION + 10), (DIST_TO_FOUNDATION + 10), 5.0);
-        //Rotate CW 90 deg
-        encoderDrive(1, (-WHEEL_CIRCUMFERENCE_INCHES), (WHEEL_CIRCUMFERENCE_INCHES), 5.0);
-        //Release Foundation
         robot.foundHook1.setPosition(0.0);
         robot.foundHook2.setPosition(1.0);
-        //Rotate CCW 180 deg
-        encoderDrive(1, (2 * WHEEL_CIRCUMFERENCE_INCHES), (2 * -WHEEL_CIRCUMFERENCE_INCHES), 5.0);
+        sleep(1000);
+        //Pulls Foundation backward partially
+        encoderDrive(1, (DIST_TO_FOUNDATION), (DIST_TO_FOUNDATION), 1.1);
+        sleep(700);
+        //Rotate CCW 90 deg
+        encoderDrive(0.5, (WHEEL_CIRCUMFERENCE_INCHES), (-WHEEL_CIRCUMFERENCE_INCHES), 1.7);
+        sleep(700);
+        encoderDrive(1, (-DIST_TO_FOUNDATION), (-DIST_TO_FOUNDATION), 0.8);
+        //encoderDrive(1, -DIST_TO_FOUNDATION, -DIST_TO_FOUNDATION, 0.2);
+        //sleep(400);
+        //Release Foundation
+        robot.foundHook1.setPosition(1.0);
+        robot.foundHook2.setPosition(0.0);
+        sleep(400);
+        //encoderDrive(0.5, (-WHEEL_CIRCUMFERENCE_INCHES), (WHEEL_CIRCUMFERENCE_INCHES), 2.5);
+        //sleep(300);
+        encoderDrive(1, (DIST_TO_FOUNDATION), (DIST_TO_FOUNDATION), 1.2);
+        sleep(300);
         //FWD to line
-        encoderDrive(1, (30), (30), 5.0);
-
-
+        //encoderDrive(1, (30), (30), 5.0);
     }
 //Encoder method
 // Note: Reverse movement is obtained by setting a negative distance (not speed)
