@@ -48,14 +48,14 @@ public class Red_Foundation_Auto extends LinearOpMode {
         robot.tuckAwayClaw1.setPower(-.4);
         robot.tuckAwayClaw2.setPower(.8);
         //Drives forward to foundation
-        encoderDrive(1, -DIST_TO_FOUNDATION, -DIST_TO_FOUNDATION, 1.0);
+        encoderDrive(1, -DIST_TO_FOUNDATION, -DIST_TO_FOUNDATION, 0.9);
         sleep(500);
         //puts down foundation Hooks
         robot.foundHook1.setPosition(0.0);
         robot.foundHook2.setPosition(1.0);
         sleep(1000);
         //Pulls Foundation backward partially
-        encoderDrive(1, (DIST_TO_FOUNDATION), (DIST_TO_FOUNDATION), 1.1);
+        encoderDrive(1, (DIST_TO_FOUNDATION), (DIST_TO_FOUNDATION), 1.0);
         sleep(700);
         //Rotate CCW 90 deg
         encoderDrive(0.5, (WHEEL_CIRCUMFERENCE_INCHES), (-WHEEL_CIRCUMFERENCE_INCHES), 1.7);
