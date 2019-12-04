@@ -43,7 +43,6 @@ public class Blue_Foundation_Auto extends LinearOpMode {
                 robot.rightDrive.getCurrentPosition());
         telemetry.update();
 
-
         waitForStart();
         robot.tuckAwayClaw1.setPower(-.4);
         robot.tuckAwayClaw2.setPower(.8);
