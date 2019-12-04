@@ -110,17 +110,18 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
             robot.tapeExt.setPower(gamepad2.right_stick_y);
             telemetry.addData("Moving the tape extender", "true");
             telemetry.update();
-      /*
+
+            /* old linear actuator code
             if (gamepad2.dpad_up) {
                 robot.vertExt.setPower(-1);
             } else if (gamepad2.dpad_down) {
                 robot.vertExt.setPower(1);
             } else if (gamepad2.dpad_right) {
                 robot.vertExt.setPower(0);
-*/
+            */
 
 
-            //claw grabber thingy
+            //Stone grabber Mech
             if (gamepad1.right_bumper) {//Closed
                 robot.rightClaw.setPosition(0.65);
                 robot.leftClaw.setPosition(0.2);//Works PERFECTLY DALTON (DONT TOUCH)
