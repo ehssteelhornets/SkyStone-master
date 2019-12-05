@@ -106,11 +106,6 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
             telemetry.addData("Moving the linear actuator", "true");
             telemetry.update();
 
-            //tape extender
-            robot.tapeExt.setPower(gamepad2.right_stick_y);
-            telemetry.addData("Moving the tape extender", "true");
-            telemetry.update();
-
             /* old linear actuator code
             if (gamepad2.dpad_up) {
                 robot.vertExt.setPower(-1);
@@ -119,19 +114,25 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
             } else if (gamepad2.dpad_right) {
                 robot.vertExt.setPower(0);
             */
-
+			
+			//tape extender
+            robot.tapeExt.setPower(gamepad2.right_stick_y);
+            telemetry.addData("Moving the tape extender", "true");
+            telemetry.update();
 
             //Stone grabber Mech
             if (gamepad1.right_bumper) {//Closed
-                robot.rightClaw.setPosition(0.65);
-                robot.leftClaw.setPosition(0.2);//Works PERFECTLY DALTON (DONT TOUCH)
+                //robot.rightClaw.setPosition(0.65);
+                robot.rightClaw.setPosition(0.8);
+                //robot.leftClaw.setPosition(0.2); old
+                robot.leftClaw.setPosition(0.05);
                 telemetry.addData("Closing grabber", "true");
                 telemetry.update();
             }
             else if (gamepad1.left_bumper) {//Opened
                 //clawOffset = 0.0;
                 //inversely proportional
-                robot.rightClaw.setPosition(0.5);//WORKS PERFECTLY DALTON (DONT TOUCH)
+                robot.rightClaw.setPosition(0.5);//WORKS PERFECTLY SRIJAN (DONT TOUCH)
                 robot.leftClaw.setPosition(0.35);
                 telemetry.addData("Opening grabber moderate amount", "true");
                 telemetry.update();
@@ -139,7 +140,7 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
             else if (gamepad1.left_trigger != 0) {//Opened
             //clawOffset = 0.0;
             //inversely proportional
-                robot.rightClaw.setPosition(0.3);//WORKS PERFECTLY DALTON (DONT TOUCH)
+                robot.rightClaw.setPosition(0.3);//WORKS PERFECTLY SRIJAN (DONT TOUCH)
                 robot.leftClaw.setPosition(0.55);
                 telemetry.addData("Opening grabber large amount", "true");
                 telemetry.update();
