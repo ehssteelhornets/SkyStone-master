@@ -57,7 +57,7 @@ public class Blue_Foundation_Auto extends LinearOpMode {
         encoderDrive(1, (DIST_TO_FOUNDATION), (DIST_TO_FOUNDATION), 1.1);
         sleep(700);
         //Rotate CCW 90 deg
-        encoderDrive(0.5, (-WHEEL_CIRCUMFERENCE_INCHES), (WHEEL_CIRCUMFERENCE_INCHES), 1.7);
+        encoderDrive(0.5, (-WHEEL_CIRCUMFERENCE_INCHES), (WHEEL_CIRCUMFERENCE_INCHES), 1.85);
         sleep(700);
         encoderDrive(1, (-DIST_TO_FOUNDATION), (-DIST_TO_FOUNDATION), 0.8);
         //encoderDrive(1, -DIST_TO_FOUNDATION, -DIST_TO_FOUNDATION, 0.2);

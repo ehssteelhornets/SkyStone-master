@@ -16,8 +16,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefau
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 /*
- * This OpMode was written for the VuforiaDemo Basics video. This demonstrates basic principles of
- * using VuforiaDemo in FTC.
+ * This OpMode was adapted from the VuforiaDemo Basics video by the Steel Hornets.
  */
 @Autonomous(name = "Vuforia", group = "Pushbot")
 public class Vuforia extends LinearOpMode
