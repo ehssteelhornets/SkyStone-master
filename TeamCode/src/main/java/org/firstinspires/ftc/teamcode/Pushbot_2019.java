@@ -41,8 +41,8 @@ public class Pushbot_2019 {
         tuckAwayClaw1  = hwMap.get(CRServo.class, "tuckAwayClaw1");
         tuckAwayClaw2  = hwMap.get(CRServo.class, "tuckAwayClaw2");
         //set servo to starting position
-        foundHook1.setPosition(1.0);
-        foundHook2.setPosition(0.0);
+        foundHook1.setPosition(0.0);
+        foundHook2.setPosition(1.0);
         leftClaw.setPosition(.35);
         rightClaw.setPosition(0.5);
         tuckAwayClaw1.setPower(-.4);
