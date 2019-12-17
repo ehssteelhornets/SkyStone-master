@@ -15,8 +15,8 @@ public class Pushbot_2019 {
     public DcMotor  rightDrive2;
     public DcMotor vertExt;
     public DcMotor tapeExt;
-    public Servo foundHook1;
-    public Servo foundHook2;
+    public CRServo foundHook1;
+    public CRServo foundHook2;
     public Servo rightClaw;
     public Servo leftClaw;
     public CRServo tuckAwayClaw1;
@@ -34,15 +34,15 @@ public class Pushbot_2019 {
         // Save reference to Hardware map
         hwMap = ahwMap;
         //Define and Initialize servos
-        foundHook1  = hwMap.get(Servo.class, "foundHook1");
-        foundHook2  = hwMap.get(Servo.class, "foundHook2");
+        foundHook1  = hwMap.get(CRServo.class, "foundHook1");
+        foundHook2  = hwMap.get(CRServo.class, "foundHook2");
         leftClaw  = hwMap.get(Servo.class, "leftClaw");
         rightClaw  = hwMap.get(Servo.class, "rightClaw");
         tuckAwayClaw1  = hwMap.get(CRServo.class, "tuckAwayClaw1");
         tuckAwayClaw2  = hwMap.get(CRServo.class, "tuckAwayClaw2");
         //set servo to starting position
-        foundHook1.setPosition(0.0);
-        foundHook2.setPosition(1.0);
+        foundHook1.setPower(1.0);
+        foundHook2.setPower(0.0);
         leftClaw.setPosition(.35);
         rightClaw.setPosition(0.5);
         tuckAwayClaw1.setPower(-.4);
