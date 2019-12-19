@@ -82,15 +82,15 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
             }
 
             if (foundHook != 0) {
-                robot.foundHook1.setPosition(1.0);
-                robot.foundHook2.setPosition(0.0);
+                robot.foundHook1.setPower(1.0);
+                robot.foundHook2.setPower(0.0);
             }
             telemetry.addData("Raising foundation hooks", "true");
             telemetry.update();
 
             if (foundHook == 0) {
-                robot.foundHook1.setPosition(0.0);
-                robot.foundHook2.setPosition(1.0);
+                robot.foundHook1.setPower(0.0);
+                robot.foundHook2.setPower(1.0);
             }
             telemetry.addData("Lowering foundation hooks", "true");
             telemetry.update();

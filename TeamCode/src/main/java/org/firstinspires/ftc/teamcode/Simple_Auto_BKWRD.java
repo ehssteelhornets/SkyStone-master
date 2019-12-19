@@ -2,10 +2,8 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.exception.TargetPositionNotSetException;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
 @Autonomous(name="Simple_Auto_BKWRD", group ="Pushbot")
 public class Simple_Auto_BKWRD extends LinearOpMode {
     Pushbot_2019 robot = new Pushbot_2019();   // Use a Pushbot's hardware
@@ -15,7 +13,7 @@ public class Simple_Auto_BKWRD extends LinearOpMode {
     static final double DRIVE_GEAR_REDUCTION = 1.0;     // This is < 1.0 if geared UP AndyMark Orbital 20
     static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
     static final double WHEEL_CIRCUMFERENCE_INCHES = (WHEEL_DIAMETER_INCHES * Math.PI);
-    static final double COUNTS_PER_INCH = (TICKS_PER_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
+    static final double COUNTS_PER_INCH = (TICKS_PER_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_CIRCUMFERENCE_INCHES);
     float hsvValues[] = {0F, 0F, 0F};
     final float values[] = hsvValues;
     final double SCALE_FACTOR = 255;
@@ -33,6 +31,7 @@ public class Simple_Auto_BKWRD extends LinearOpMode {
         robot.rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.leftDrive2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightDrive2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.leftDrive2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -43,9 +42,17 @@ public class Simple_Auto_BKWRD extends LinearOpMode {
                 robot.rightDrive.getCurrentPosition());
         telemetry.update();
         waitForStart();
+        encoderDrive(10,  48,  48, 5.0);
+        sleep(5000);
         //Drives forward to foundation
-        encoderDrive(1,-30,-30,5);
+        encoderDrive(1.0,  48,  48, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        sleep(5000);
+        encoderDrive(1.0,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
+        encoderDrive(1.0, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
+        //robot.leftClaw.setPosition(1.0);            // S4: Stop and close the claw.
+        //robot.rightClaw.setPosition(0.0);
+        sleep(1000);     // pause for servos to move
     }
 //Encoder method
 // Note: Reverse movement is obtained by setting a negative distance (not speed)
@@ -69,10 +76,10 @@ public class Simple_Auto_BKWRD extends LinearOpMode {
         try {
             if (opModeIsActive()) {
                 // Determine new target position, and pass to motor controller
-                newLeftTarget = robot.leftDrive.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
-                newRightTarget = robot.rightDrive.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
-                newLeftTarget2 = robot.leftDrive2.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
-                newRightTarget2 = robot.rightDrive2.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
+                newLeftTarget = robot.leftDrive.getCurrentPosition() + (int) ((leftInches - 8) * COUNTS_PER_INCH + 10);
+                newRightTarget = robot.rightDrive.getCurrentPosition() + (int) ((rightInches - 8) * COUNTS_PER_INCH + 10);
+                newLeftTarget2 = robot.leftDrive2.getCurrentPosition() + (int) ((leftInches - 8) * COUNTS_PER_INCH + 10);
+                newRightTarget2 = robot.rightDrive2.getCurrentPosition() + (int) ((rightInches - 8) * COUNTS_PER_INCH + 10);
                 robot.leftDrive.setTargetPosition(newLeftTarget);
                 robot.rightDrive.setTargetPosition(newRightTarget);
                 robot.leftDrive2.setTargetPosition(newLeftTarget2);
@@ -97,7 +104,6 @@ public class Simple_Auto_BKWRD extends LinearOpMode {
                     telemetry.addData("Path2", "Running at %7d :%7d",
                             robot.leftDrive.getCurrentPosition(),
                             robot.rightDrive.getCurrentPosition());
-                    telemetry.addData("Back wheels", newLeftTarget2 + "" + newRightTarget2);
                     telemetry.update();
                 }
 
