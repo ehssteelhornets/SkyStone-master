@@ -58,8 +58,8 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
                 //Mech Drive
                 telemetry.addData("Driving", "true");
                 telemetry.update();
-                double r = Math.hypot(-gamepad1.left_stick_x, -gamepad1.left_stick_y);
-                double robotAngle = Math.atan2(-gamepad1.left_stick_y, -gamepad1.left_stick_x) - Math.PI / 4;
+                double r = Math.hypot(gamepad1.left_stick_x, -gamepad1.left_stick_y);
+                double robotAngle = Math.atan2(-gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
                 double rightX = gamepad1.right_stick_x;
                 final double v1 = r * Math.cos(robotAngle) + rightX;
                 final double v2 = r * Math.sin(robotAngle) - rightX;
@@ -82,21 +82,21 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
             }
 
             if (foundHook != 0) {
-                robot.foundHook1.setPower(1.0);
-                robot.foundHook2.setPower(0.0);
+                robot.foundHook1.setPosition(1.0);
+                robot.foundHook2.setPosition(0.0);
             }
             telemetry.addData("Raising foundation hooks", "true");
             telemetry.update();
 
             if (foundHook == 0) {
-                robot.foundHook1.setPower(0.0);
-                robot.foundHook2.setPower(1.0);
+                robot.foundHook1.setPosition(0.0);
+                robot.foundHook2.setPosition(1.0);
             }
             telemetry.addData("Lowering foundation hooks", "true");
             telemetry.update();
 
             //Controls linear actuator
-            // Show the elapsed game time and wheel power
+            // Show the elapsed game time and wheel powerhhy
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", right, left);
             telemetry.update();

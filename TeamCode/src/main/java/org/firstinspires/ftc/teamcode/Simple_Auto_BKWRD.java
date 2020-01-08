@@ -18,7 +18,7 @@ public class Simple_Auto_BKWRD extends LinearOpMode {
     final float values[] = hsvValues;
     final double SCALE_FACTOR = 255;
     int test = 0;
-    static final double DIST_TO_FOUNDATION = 48;
+    static final double DIST_TO_FOUNDATION = 33;
 
     @Override
     public void runOpMode() {
@@ -42,12 +42,13 @@ public class Simple_Auto_BKWRD extends LinearOpMode {
                 robot.rightDrive.getCurrentPosition());
         telemetry.update();
         waitForStart();
-        encoderDrive(10,  48,  48, 5.0);
-        sleep(5000);
         //Drives forward to foundation
-        encoderDrive(1.0,  48,  48, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
-        sleep(5000);
-        encoderDrive(1.0,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
+        encoderDrive(1.0,  33,  33, 3.0);  // S1: Forward 33 Inches with 3 Sec timeout
+        sleep(2000);
+        encoderDrive(1.0, -33,-33,3.0);
+        sleep(2000);
+        encoderDrive(1.0,   -12, 12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
+        sleep(2000);
         encoderDrive(1.0, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
         //robot.leftClaw.setPosition(1.0);            // S4: Stop and close the claw.
@@ -76,10 +77,10 @@ public class Simple_Auto_BKWRD extends LinearOpMode {
         try {
             if (opModeIsActive()) {
                 // Determine new target position, and pass to motor controller
-                newLeftTarget = robot.leftDrive.getCurrentPosition() + (int) ((leftInches - 8) * COUNTS_PER_INCH + 10);
-                newRightTarget = robot.rightDrive.getCurrentPosition() + (int) ((rightInches - 8) * COUNTS_PER_INCH + 10);
-                newLeftTarget2 = robot.leftDrive2.getCurrentPosition() + (int) ((leftInches - 8) * COUNTS_PER_INCH + 10);
-                newRightTarget2 = robot.rightDrive2.getCurrentPosition() + (int) ((rightInches - 8) * COUNTS_PER_INCH + 10);
+                newLeftTarget = robot.leftDrive.getCurrentPosition() + (int) ((leftInches) * COUNTS_PER_INCH + 10);
+                newRightTarget = robot.rightDrive.getCurrentPosition() + (int) ((rightInches) * COUNTS_PER_INCH + 10);
+                newLeftTarget2 = robot.leftDrive2.getCurrentPosition() + (int) ((leftInches) * COUNTS_PER_INCH + 10);
+                newRightTarget2 = robot.rightDrive2.getCurrentPosition() + (int) ((rightInches) * COUNTS_PER_INCH + 10);
                 robot.leftDrive.setTargetPosition(newLeftTarget);
                 robot.rightDrive.setTargetPosition(newRightTarget);
                 robot.leftDrive2.setTargetPosition(newLeftTarget2);
