@@ -44,29 +44,33 @@ public class Blue_Foundation_Auto extends LinearOpMode {
         waitForStart();
         robot.tuckAwayClaw1.setPower(-.4);
         robot.tuckAwayClaw2.setPower(.8);
+        //strafes left to change pivot point
+        rightStrafe(1.0,8,2.0);
+        sleep(800);
         //Drives forward to foundation
-        encoderDrive(1, -34, -34, 2.0);
+        encoderDrive(1.0, -34, -34, 2.0);
         //puts down foundation Hooks
         robot.foundHook1.setPosition(1.0);
         robot.foundHook2.setPosition(0.0);
         sleep(1000);
         //Pulls Foundation backward partially
-        encoderDrive(1, 34, 34, 2.0);
+        encoderDrive(1.0, 35, 35, 2.0);
         sleep(700);
         //Rotate CCW 90 deg
-        encoderDrive(1.0, -24, 24, 2.0);
-        sleep(700);
-        encoderDrive(1, (-DIST_TO_FOUNDATION), (-DIST_TO_FOUNDATION), 0.8);
+        //encoderDrive(1.0, -24, 24, 2.0);
+        //sleep(700);
+        //encoderDrive(1, (-DIST_TO_FOUNDATION), (-DIST_TO_FOUNDATION), 0.8);
         //encoderDrive(1, -DIST_TO_FOUNDATION, -DIST_TO_FOUNDATION, 0.2);
         //sleep(400);
         //Release Foundation
-        robot.foundHook1.setPosition(1.0);
-        robot.foundHook2.setPosition(0.0);
-        sleep(400);
+        robot.foundHook1.setPosition(0.0);
+        robot.foundHook2.setPosition(1.0);
+        sleep(500);
         //encoderDrive(0.5, (-WHEEL_CIRCUMFERENCE_INCHES), (WHEEL_CIRCUMFERENCE_INCHES), 2.5);
         //sleep(300);
-        encoderDrive(1, (DIST_TO_FOUNDATION), (DIST_TO_FOUNDATION), 1.2);
-        sleep(300);
+        //encoderDrive(1, (DIST_TO_FOUNDATION), (DIST_TO_FOUNDATION), 1.2);
+        leftStrafe(1.0,47,3.0);
+        sleep(500);
         //FWD to line
         //encoderDrive(1, (30), (30), 5.0);
     }
@@ -169,10 +173,13 @@ public class Blue_Foundation_Auto extends LinearOpMode {
                 robot.rightDrive2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 // reset the timeout time and start motion.
                 runtime.reset();
-                robot.leftDrive.setPower(-Math.abs(speed));
+                //robot.leftDrive.setPower(-Math.abs(speed));
+                robot.leftDrive.setPower(Math.abs(speed));
                 robot.rightDrive.setPower(Math.abs(speed));
                 robot.leftDrive2.setPower(Math.abs(speed));
-                robot.rightDrive2.setPower(-Math.abs(speed));
+                //robot.rightDrive2.setPower(-Math.abs(speed));
+                robot.rightDrive2.setPower(Math.abs(speed));
+
                 while (opModeIsActive() &&
                         (runtime.seconds() < timeoutS) &&
                         (robot.leftDrive.isBusy() && robot.rightDrive.isBusy())) {
@@ -232,8 +239,10 @@ public class Blue_Foundation_Auto extends LinearOpMode {
                 // reset the timeout time and start motion.
                 runtime.reset();
                 robot.leftDrive.setPower(Math.abs(speed));
-                robot.rightDrive.setPower(-Math.abs(speed));
-                robot.leftDrive2.setPower(-Math.abs(speed));
+                //robot.rightDrive.setPower(-Math.abs(speed));
+                robot.rightDrive.setPower(Math.abs(speed));
+                //robot.leftDrive2.setPower(-Math.abs(speed));
+                robot.leftDrive2.setPower(Math.abs(speed));
                 robot.rightDrive2.setPower(Math.abs(speed));
                 while (opModeIsActive() &&
                         (runtime.seconds() < timeoutS) &&

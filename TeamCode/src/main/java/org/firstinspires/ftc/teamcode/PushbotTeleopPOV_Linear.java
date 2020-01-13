@@ -120,7 +120,18 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
             telemetry.addData("Moving the tape extender", "true");
             telemetry.update();
 
-            //Stone grabber Mech
+
+            //stone grabber mech
+
+            if (gamepad2.dpad_up) {
+                robot.stoneClaw.setPower(0.15);
+            } else if (gamepad2.dpad_down) {
+                robot.stoneClaw.setPower(0);
+            }
+
+
+            //old Stone grabber Mech
+            /*
             if (gamepad1.right_bumper) {//Closed
                 //robot.rightClaw.setPosition(0.65);
                 robot.rightClaw.setPosition(0.8);
@@ -145,7 +156,7 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
                 telemetry.addData("Opening grabber large amount", "true");
                 telemetry.update();
             }
-
+            */
             //tuckawayclaw toggle
             if (gamepad2.x && tuckAway != 0) {
                 tuckAway--;
