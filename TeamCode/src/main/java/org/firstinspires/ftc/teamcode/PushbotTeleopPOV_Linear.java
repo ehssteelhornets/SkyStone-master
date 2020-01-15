@@ -17,6 +17,7 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
     private static double left2;
     private static double foundHook = 1;
     private static double tuckAway = 1;
+    private double bloob = .001;
     Pushbot_2019 robot = new Pushbot_2019();
 
     @Override
@@ -114,8 +115,8 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
             } else if (gamepad2.dpad_right) {
                 robot.vertExt.setPower(0);
             */
-			
-			//tape extender
+
+            //tape extender
             robot.tapeExt.setPower(gamepad2.right_stick_y);
             telemetry.addData("Moving the tape extender", "true");
             telemetry.update();
@@ -123,12 +124,17 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
 
             //stone grabber mech
 
-            if (gamepad2.dpad_up) {
-                robot.stoneClaw.setPower(0.15);
-            } else if (gamepad2.dpad_down) {
+            if (gamepad1.dpad_up) {
+                robot.stoneClaw.setPower(-0.05);
+            } else if (gamepad1.dpad_down) {
                 robot.stoneClaw.setPower(0);
+            } else if (gamepad1.dpad_right) {
+                robot.stoneClaw.setPower(-0.001);
+            } else if (gamepad1.dpad_left) {
+                robot.stoneClaw.setPower(-.05);
+                sleep(700);
+                robot.stoneClaw.setPower(-.001);
             }
-
 
             //old Stone grabber Mech
             /*

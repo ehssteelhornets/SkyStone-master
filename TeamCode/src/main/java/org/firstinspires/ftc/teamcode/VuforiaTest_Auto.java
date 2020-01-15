@@ -267,7 +267,7 @@ public class VuforiaTest_Auto extends LinearOpMode {
         // This sequence is used to enable the new remote DS Camera Preview feature to be used with this sample.
         // CONSEQUENTLY do not put any driving commands in this loop.
         // To restore the normal opmode structure, just un-comment the following line:
-
+        targetsSkyStone.activate();
         waitForStart();
         encoderDrive(1.0,-25,-25,2.0);// forward 25 inches
         sleep(700);
@@ -278,6 +278,7 @@ public class VuforiaTest_Auto extends LinearOpMode {
             // grab stone
             // backward same distance
             // strafe right
+
 
         // Note: To use the remote camera preview:
         // AFTER you hit Init on the Driver Station, use the "options menu" to select "Camera Stream"
