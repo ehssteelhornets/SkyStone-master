@@ -272,6 +272,7 @@ public class VuforiaTest_Auto extends LinearOpMode {
         encoderDrive(1.0,-25,-25,2.0);// forward 25 inches
         sleep(700);
         leftStrafe(1.0,18,2.0);// strafe left 18 inches
+        
         // initiate runtime
         // if recognize skystone target == true
             // forward

@@ -17,7 +17,6 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
     private static double left2;
     private static double foundHook = 1;
     private static double tuckAway = 1;
-    private double bloob = .001;
     Pushbot_2019 robot = new Pushbot_2019();
 
     @Override
@@ -138,27 +137,27 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
             */
             //old Stone grabber Mech
 
-            if (gamepad1.right_bumper) {//Closed
+            if (gamepad1.right_bumper) {//Open complete
                 //robot.rightClaw.setPosition(0.65);
                 robot.rightClaw.setPosition(0.8);
                 //robot.leftClaw.setPosition(0.2); old
-                robot.leftClaw.setPosition(0.05);
+                robot.leftClaw.setPosition(0.0);
                 telemetry.addData("Closing grabber", "true");
                 telemetry.update();
             }
             else if (gamepad1.left_bumper) {//Opened
                 //clawOffset = 0.0;
                 //inversely proportional
-                robot.rightClaw.setPosition(0.5);//WORKS PERFECTLY SRIJAN (DONT TOUCH)
+                robot.rightClaw.setPosition(0.5);//WORKS PERFECTLY SRIJAN (GOOD JOB)
                 robot.leftClaw.setPosition(0.35);
                 telemetry.addData("Opening grabber moderate amount", "true");
                 telemetry.update();
             }
-            else if (gamepad1.left_trigger != 0) {//Opened
+            else if (gamepad1.left_trigger != 0) {//CLOSED
             //clawOffset = 0.0;
             //inversely proportional
-                robot.rightClaw.setPosition(0.3);//WORKS PERFECTLY SRIJAN (DONT TOUCH)
-                robot.leftClaw.setPosition(0.55);
+                robot.rightClaw.setPosition(0.2);//WORKS PERFECTLY SRIJAN (GOOD JOB)
+                robot.leftClaw.setPosition(0.65);
                 telemetry.addData("Opening grabber large amount", "true");
                 telemetry.update();
             }
